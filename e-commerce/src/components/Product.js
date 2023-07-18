@@ -16,13 +16,16 @@ const Product = ({ item, show }) => {
   const key = "updatable";
   const id = localStorage.getItem("id");
   const [messageApi, contextHolder] = message.useMessage();
-  const [dis, setDis] = useState(false)
+  const [dis, setDis] = useState(false);
 
-  const check = async() => {
-    const res = await axios.post("http://localhost:8000/checkCart", { id: item._id, myId: id});
+  const check = async () => {
+    const res = await axios.post("http://localhost:8000/checkCart", {
+      id: item._id,
+      myId: id,
+    });
 
     setDis(res.data);
-  }
+  };
 
   check();
 
@@ -31,7 +34,7 @@ const Product = ({ item, show }) => {
   const [qty, setQty] = useState("");
   const [des, setDes] = useState("");
   const [cat, setCat] = useState("");
-  const [stat, setStat] = useState("")
+  const [stat, setStat] = useState("");
 
   const [open, setOpen] = useState(false);
 
@@ -52,7 +55,7 @@ const Product = ({ item, show }) => {
   const handleOk2 = async () => {
     const res = await axios.post("http://localhost:8000/update", {
       id: item._id,
-      data: { status: 'p' },
+      data: { status: "p" },
     });
     messageApi.open({
       key,
@@ -88,16 +91,23 @@ const Product = ({ item, show }) => {
     setOpen(true);
   };
 
-  const add = async() => {
-    const res = await axios.post("http://localhost:8000/cart", { id: id, data: {itemId: item._id, count: 1, price: item.price,uploadedBy: item.uploadedBy}});
+  const add = async () => {
+    const res = await axios.post("http://localhost:8000/cart", {
+      id: id,
+      data: {
+        itemId: item._id,
+        count: 1,
+        price: item.price,
+        uploadedBy: item.uploadedBy,
+      },
+    });
     messageApi.open({
       key,
       type: "success",
       content: "Added to cart!",
       duration: 2,
     });
-  }
-
+  };
 
   return (
     <div style={{ padding: 15 }}>
@@ -135,18 +145,24 @@ const Product = ({ item, show }) => {
           </Button>
         </div>
 
-        <Button
-          size={size}
-          style={{
-            marginTop: 10,
-            width: "100%",
-            display: show ? "block" : "none",
-          }}
-          disabled={dis}
-          onClick={add}
-        >
-          {dis?"Added to Cart":"Add to cart"}
-        </Button>
+        {item.qty === 0 ? (
+          <Button size={size} style={{ marginTop: 10 }} danger>
+            Out of Stock
+          </Button>
+        ) : (
+          <Button
+            size={size}
+            style={{
+              marginTop: 10,
+              width: "100%",
+              display: show ? "block" : "none",
+            }}
+            disabled={dis}
+            onClick={add}
+          >
+            {dis ? "Added to Cart" : "Add to cart"}
+          </Button>
+        )}
       </Card>
 
       <Modal
@@ -157,19 +173,14 @@ const Product = ({ item, show }) => {
         onCancel={handleCancel}
         style={{ top: "10vh" }}
         footer={[
-          <Button
-            onClick={handleOk}
-          >
-            Update
-          </Button>,
-          stat==='d' ?
-          <Button
-            key="submit"
-            type="primary"
-            onClick={handleOk2}
-          >
-            Publish
-          </Button> : "",
+          <Button onClick={handleOk}>Update</Button>,
+          stat === "d" ? (
+            <Button key="submit" type="primary" onClick={handleOk2}>
+              Publish
+            </Button>
+          ) : (
+            ""
+          ),
         ]}
       >
         <Form>
@@ -234,7 +245,6 @@ const Product = ({ item, show }) => {
               onChange={(e) => setDes(e.target.value)}
             />
           </Form.Item>
-          
         </Form>
       </Modal>
     </div>

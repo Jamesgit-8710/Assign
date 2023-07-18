@@ -137,6 +137,8 @@ app.post("/addOrder", (req, res) => {
   req.body.data.forEach(async (item) => {
     const ordr = new order();
 
+    const c = item.count;
+
     ordr.itemId = item.itemId;
     ordr.vendor = item.uploadedBy;
     ordr.user = req.body.id;
@@ -148,7 +150,11 @@ app.post("/addOrder", (req, res) => {
     ordr.track = 1;
 
     await ordr.save();
+
+    await product.updateOne({_id: item.itemId},{$inc: {qty: -c}})
   });
+
+
 
   res.status(200).send(true);
 
