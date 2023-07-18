@@ -6,6 +6,8 @@ import axios from 'axios';
 import { message } from 'antd';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../services/firbase.auth';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../services/slices/user.slice';
 // import validator from 'validator'
 
 const Login = ({ set }) => {
@@ -13,6 +15,7 @@ const Login = ({ set }) => {
     const key = 'updatable';
 
     const [messageApi, contextHolder] = message.useMessage();
+    const dispatch = useDispatch();
 
     const onFinish = async(values) => {
         // const x = values.username;
@@ -20,8 +23,11 @@ const Login = ({ set }) => {
 
         const res = await axios.post('http://localhost:8000/check',{user: values.username,pass: values.password})
 
+        const res2 = await axios.post('http://localhost:8000/getUser',{id:res.data});
+
         if(res.data){
             localStorage.setItem('id', res.data)
+            dispatch(addUser({id: res.data, prof: res2.data.prof}));
             messageApi.open({
                 key,
                 type: 'success',
@@ -51,8 +57,11 @@ const Login = ({ set }) => {
         const user = result.user;
         const res = await axios.post('http://localhost:8000/exist',{user: user.email})
 
+        const res2 = await axios.post('http://localhost:8000/getUser',{id:res.data});
+
         if(res.data){
             localStorage.setItem('id', res.data)
+            dispatch(addUser({id: res.data, prof: res2.data.prof}));
             messageApi.open({
                 key,
                 type: 'success',

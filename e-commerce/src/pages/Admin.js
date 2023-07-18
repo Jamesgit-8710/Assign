@@ -33,6 +33,7 @@ import Drop from "../components/Drop";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../services/firbase.auth";
 import AdminOrders from "../components/AdminOrders";
+import VenHistory from "../components/VenHistory";
 
 function getItem(label, key, icon, click) {
   return {
@@ -106,7 +107,7 @@ const Admin = () => {
   const [des, setDes] = useState("");
   const [cat, setCat] = useState("");
   const [data, setData] = useState([]);
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState(1);
   const [userData, setUserData] = useState({});
   const [files, setFiles] = useState([]);
   const [val2, setVal2] = useState("p");
@@ -255,6 +256,7 @@ const Admin = () => {
         id: id,
       });
       setUserData(res2.data);
+
     };
 
     getData();
@@ -312,10 +314,10 @@ const Admin = () => {
                     marginRight: 60,
                     cursor: "pointer",
                   }}
-                  
+                  onClick={() => {setVal(5)}}
                 >
                   Order history
-                </p>:""}
+                </p> : ""}
                 <Button
                   style={{ marginTop: 5 }}
                   type="primary"
@@ -337,7 +339,9 @@ const Admin = () => {
             <AdminOrders />
           ) : val === 4 ? (
             <Profile userData={userData} />
-          ) : (
+          ) : val === 5 ? 
+          <VenHistory orderVis={true}/> 
+          : (
             <div
               className="cart"
               style={{
@@ -426,10 +430,11 @@ const Admin = () => {
                     setCat(e);
                   }}
                 >
-                  <Select.Option value="demo">Demo</Select.Option>
-                  <Select.Option value="demo2">df</Select.Option>
-                  <Select.Option value="demo3">Dfasemo</Select.Option>
-                  <Select.Option value="demo4">Demfasfo</Select.Option>
+                  <Select.Option value="Cloths">Cloths</Select.Option>
+                  <Select.Option value="Electronics">Electronics</Select.Option>
+                  <Select.Option value="Shoes">Shoes</Select.Option>
+                  <Select.Option value="Accessories">Accessories</Select.Option>
+                  <Select.Option value="Furniture">Furniture</Select.Option>
                 </Select>
               </Form.Item>
               <Form.Item

@@ -21,7 +21,7 @@ const AdminOrders = () => {
     <div style={{height: "calc(100vh - 68px)", width: "calc(100vw - 256px)", backgroundColor: "rgb(241, 243, 245)",display: "flex",flexWrap: "wrap",overflow: "scroll",justifyContent: "center"}} className='cart'>
       {data.map((i) => {
         if(i.status==='d'){
-        return <OrderCard item={i} />;
+        return <OrderCard item={i} show={true}/>;
         }
       })}
       <div style={{height: 100,width: "100vw"}}></div>

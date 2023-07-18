@@ -219,14 +219,14 @@ const Vendor = () => {
         }}
       >
         <h2 style={{ color: "white", fontWeight: 500 }}>Vendor Panel</h2>
-        <Dropdown menu={{ items, onClick }}>
+        {val3===0? <Dropdown menu={{ items, onClick }}>
           <Button style={{ marginTop: 4 }}>
             <Space>
               {val}
               <DownOutlined />
             </Space>
           </Button>
-        </Dropdown>
+        </Dropdown>:""}
         <div style={{ display: "flex", color: "white" }}>
           <p
             style={{
@@ -283,7 +283,7 @@ const Vendor = () => {
         val3 === 1 ?
           <VenOrders />
           : val3 === 2 ?
-            <VenHistory />
+            <VenHistory orderVis={false}/>
             :
             <div
               style={{
@@ -364,10 +364,11 @@ const Vendor = () => {
                 setCat(e);
               }}
             >
-              <Select.Option value="demo">Demo</Select.Option>
-              <Select.Option value="demo2">df</Select.Option>
-              <Select.Option value="demo3">Dfasemo</Select.Option>
-              <Select.Option value="demo4">Demfasfo</Select.Option>
+              <Select.Option value="Cloths">Cloths</Select.Option>
+              <Select.Option value="Electronics">Electronics</Select.Option>
+              <Select.Option value="Shoes">Shoes</Select.Option>
+              <Select.Option value="Accessories">Accessories</Select.Option>
+              <Select.Option value="Furniture">Furniture</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -397,7 +398,7 @@ const Vendor = () => {
             })}
 
             {files.length !== 4 ? (
-              <div style={{ height: 100, width: 100, backgroundColor: "grey" }}>
+              <div style={{ height: 110, width: 110, backgroundColor: "rgb(241, 243, 245)",border: "1px dashed rgb(200, 200, 200)",borderRadius: 10}}>
                 <input
                   type="file"
                   onChange={set}

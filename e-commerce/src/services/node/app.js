@@ -35,6 +35,7 @@ const prodSchema = new mongoose.Schema({
   uploadedBy: String,
   status: String,
   images: Array,
+  sellCount: Number
 });
 
 const product = mongoose.model("product", prodSchema);
@@ -125,6 +126,7 @@ app.post("/addProduct", async (req, res) => {
   prod.uploadedBy = req.body.uploadedBy;
   prod.status = req.body.status;
   prod.images = req.body.images;
+  prod.sellCount = 0;
 
   await prod.save();
 
@@ -150,6 +152,8 @@ app.post("/addOrder", (req, res) => {
     ordr.track = 1;
 
     await ordr.save();
+
+    await product.updateOne({_id: item.itemId},{$inc: {sellCount: c}})
 
     await product.updateOne({_id: item.itemId},{$inc: {qty: -c}})
   });

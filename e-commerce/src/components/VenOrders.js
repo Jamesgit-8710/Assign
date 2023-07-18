@@ -33,7 +33,7 @@ const VenOrders = () => {
     >
       {data.map((i) => {
         if(i.status==='d' && i.vendor===id)
-        return <OrderCard item={i}/>;
+        return <OrderCard item={i} show={true}/>;
       })}
       <div style={{height: 100,width: "100vw"}}></div>
       <div style={{width: "100vw", backgroundColor: "white",position: "absolute",bottom: 0,fontSize: 25,fontWeight: 500,display: "flex", justifyContent: "space-between",padding: 15}}>

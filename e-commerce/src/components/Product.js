@@ -11,7 +11,7 @@ import { PlusOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
-const Product = ({ item, show }) => {
+const Product = ({ item, show, set }) => {
   const size = "large";
   const key = "updatable";
   const id = localStorage.getItem("id");
@@ -91,7 +91,8 @@ const Product = ({ item, show }) => {
     setOpen(true);
   };
 
-  const add = async () => {
+  const add = async (e) => {
+    e.stopPropagation();
     const res = await axios.post("http://localhost:8000/cart", {
       id: id,
       data: {
@@ -116,6 +117,7 @@ const Product = ({ item, show }) => {
         hoverable
         style={{ width: 280 }}
         cover={<img alt="example" src={item.images[0]} height={300} />}
+        onClick={() => {set(item)}}
       >
         <Meta title={item.productName} description={item.des} />
         <p style={{ fontWeight: 500, fontSize: 20, marginTop: 10 }}>
@@ -146,9 +148,9 @@ const Product = ({ item, show }) => {
         </div>
 
         {item.qty === 0 ? (
-          <Button size={size} style={{ marginTop: 10 }} danger>
+          <p style={{textAlign: "center",fontSize: 20, color: "red", marginTop: 10 ,display: show ? "block" : "none"}}>
             Out of Stock
-          </Button>
+          </p>
         ) : (
           <Button
             size={size}
@@ -228,10 +230,11 @@ const Product = ({ item, show }) => {
                 setCat(e);
               }}
             >
-              <Select.Option value="demo">Demo</Select.Option>
-              <Select.Option value="demo2">df</Select.Option>
-              <Select.Option value="demo3">Dfasemo</Select.Option>
-              <Select.Option value="demo4">Demfasfo</Select.Option>
+              <Select.Option value="Cloths">Cloths</Select.Option>
+              <Select.Option value="Electronics">Electronics</Select.Option>
+              <Select.Option value="Shoes">Shoes</Select.Option>
+              <Select.Option value="Accessories">Accessories</Select.Option>
+              <Select.Option value="Furniture">Furniture</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item

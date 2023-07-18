@@ -3,7 +3,7 @@ import { Button, Steps } from 'antd';
 import iphone from '../assets/iphone.jpg'
 import axios from 'axios';
 
-const OrderCard = ({item}) => {
+const OrderCard = ({item,show}) => {
     const [current, setCurrent] = useState(item.track-1);
     const [user, setUser] = useState({});
     const [prod, setProd] = useState([]);
@@ -35,30 +35,37 @@ const OrderCard = ({item}) => {
 
     const description = <p style={{ opacity: 0 }}>content</p>;
     return (
-        <div style={{ height: 297, width: "45%",minWidth: "46rem", backgroundColor: "white", display: "flex", margin: "10px" ,padding: 10,borderRadius: 20}}>
+        <div style={{ height: 297, width: show?"45%":"500px",minWidth: show?"46rem":0, backgroundColor: "white", display: "flex", margin: "10px" ,padding: 10,borderRadius: 20}}>
             <div style={{ height: "100%", width: "100%", display: "flex",marginRight: 60,borderRight: "1px solid rgb(241, 243, 245)"}}>
                 {/* <div style={{ backgroundImage: `url(${iphone})`, height: "100%", width: 270, backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div> */}
                 <div style={{ paddingLeft: 20 }}>
                     <p style={{ fontSize: 23, fontWeight: 500}}>{prod[0]?.productName}</p>
-                    <p style={{ color: "rgb(180, 180, 180)", fontSize: 20 }}>Pcs: {item.count}, Price: &#8377;{item.price}</p>
+                    <p style={{ fontSize: 20 }}>Pcs: <span style={{color: "rgb(180, 180, 180)"}}>{item.count}</span>, Price: <span style={{color: "rgb(180, 180, 180)"}}>&#8377;{item.price}</span></p>
                     <p style={{ fontWeight: 500, fontSize: 20, marginTop: 10 }}>
-                    Total Amount: {item.price*item.count}
+                    Total Amount: <span style={{color: "rgb(180, 180, 180)"}}>&#8377;{item.price*item.count}</span>
                     </p>
                     <p style={{ fontWeight: 500, fontSize: 20, marginTop: 5 }}>
-                    Ordered by: {user.username}
+                    Ordered by: <span style={{color: "rgb(180, 180, 180)"}}>{user.username}</span>
                     </p>
                     <p style={{ fontWeight: 500, fontSize: 20, marginTop: 25 }}>
-                    Payment method: {item.payMethod}
+                    Payment method: <span style={{color: "rgb(180, 180, 180)"}}>{item.payMethod}</span>
                     </p>
                     <p style={{ fontWeight: 500, fontSize: 20, marginTop: 5 }}>
-                    Address: {item.address}
+                    Address: <span style={{color: "rgb(180, 180, 180)"}}>{item.address}</span>
                     </p>
-                    <Button type="primary" style={{ marginTop: 25, height: 40, width: 200 }} onClick={cancel} danger ghost>
+                    <Button type="primary" style={{ marginTop: 25, height: 40, width: 200 ,display: show? "block": "none"}} onClick={cancel} danger ghost>
                         Cancel order
                     </Button>
+                    {
+                        item.status==='c'?
+                        <p style={{fontSize: 22,fontWeight: 500,color:"red",marginTop: 30}}>Canceled</p>
+                        : item.status==='s' ?
+                        <p style={{fontSize: 22,fontWeight: 500,color:"blue",marginTop: 30}}>Delivered</p>
+                        : ""
+                    }
                 </div>
             </div>
-            <div style={{ width: "400px" }}>
+            <div style={{ width: "400px",display: show? "block": "none"}}>
                 <Steps
                     current={current}
                     onChange={onChange}
