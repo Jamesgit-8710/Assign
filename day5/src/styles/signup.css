@@ -1,0 +1,14 @@
+.signLeft{
+    background-color: rgb(25, 31, 53);
+    padding-top: 20px;
+}
+
+.signRight{
+    width: 500px;
+    background-color: white;
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-bottom: 40px;
+}

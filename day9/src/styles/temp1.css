@@ -1,0 +1,8 @@
+.preview{
+    height: 700px;
+    width: 600px;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    /* color: rgb(253, 248, 249); */
+}

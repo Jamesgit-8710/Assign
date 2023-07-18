@@ -1,0 +1,22 @@
+.song{
+    display: flex;
+    background-color: white;
+    padding: 5px;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.songTitle{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+
+.play2{
+    color: rgb(52, 49, 61);
+    margin: auto 10px auto auto;
+}
+
+.smallImg{
+    border-radius: 4px;
+}

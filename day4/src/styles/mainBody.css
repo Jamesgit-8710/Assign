@@ -1,0 +1,9 @@
+.mainBody{
+    display: flex;
+    justify-content: center ;
+}
+
+.temp{
+    font-weight: 600;
+    font-size: 180px!important;
+}

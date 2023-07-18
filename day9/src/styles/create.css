@@ -1,0 +1,76 @@
+.create{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(221, 225, 231);
+}
+
+.nav{
+    height: 70px;
+    width: 100vw;
+    background-color: rgb(29, 79, 153);
+}
+
+.main{
+    display: flex;
+    /* color: rgb(255, 251, 251); */
+}
+
+.left{
+    height: calc(100vh - 63px);
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.279);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right{
+    height: calc(100vh - 90px);
+    width: 100%;
+    background-color: rgb(221, 225, 231);
+}
+
+.resume{
+    height: 85%;
+    width: 40%;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;
+    overflow-y: scroll;
+    padding: 15px;
+}
+
+.margin{
+    margin-bottom: 15px;
+}
+
+.popupBack{
+    height: 100vh;
+    width: 100vw;
+    overflow: scroll;
+    background-color: rgba(0, 0, 0, 0.656);
+    justify-content: center;
+    padding-top: 60px;
+    position: fixed;
+    top: 0;
+}
+
+.submit:hover{
+    background-color: white;
+    color: rgb(29, 79, 153)!important;
+}
+
+.selected{
+    background-color: rgba(0, 0, 51, 0.222);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.resume::-webkit-scrollbar {
+    display: none;
+}
+
+.popupBack::-webkit-scrollbar {
+    display: none;
+}

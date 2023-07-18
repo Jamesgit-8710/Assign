@@ -1,0 +1,18 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.list{
+    width: 40%;
+    background-color: #EBF4FB;
+}
+
+.friendList{
+    height: calc(100% - 75px);
+    overflow: scroll;
+}
+
+.friendList::-webkit-scrollbar {
+    display: none;
+}

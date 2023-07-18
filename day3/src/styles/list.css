@@ -1,0 +1,10 @@
+.list{
+    height: 42%;
+    background-color: rgb(52, 49, 61);
+    padding: 10px;
+    overflow: scroll;
+}
+
+.list::-webkit-scrollbar {
+    display: none;
+  }

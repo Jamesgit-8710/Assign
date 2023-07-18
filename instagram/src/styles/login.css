@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.backGround{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(244, 245, 247);
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.innerDiv{
+    width: 20%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px 0 rgba(121, 121, 121, 0.1), 0 6px 20px 0 rgba(119, 119, 119, 0.1);
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding: 30px 30px;
+    min-width: 13rem;
+}

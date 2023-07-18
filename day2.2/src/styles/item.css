@@ -1,0 +1,46 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.title{
+    display: inline-block;
+    color: rgb(9, 0, 40);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.todo{
+    padding: 5px;
+    background-color: white;
+    margin: 5px;
+    margin-top: 10px;
+}
+
+.del{
+    text-decoration: none;
+    font-size: 0.8rem;
+    height: 1.2rem;
+    width: 4rem;
+    font-weight: 500;
+    color: white!important;
+    background-color: red;
+    border: 0px;
+    border-radius: 5px;
+    margin-left: 0px;
+    float: right;
+}
+
+.com{
+    text-decoration: none;
+    font-size: 0.8rem;
+    height: 1.2rem;
+    width: 4.5rem;
+    font-weight: 500;
+    color: white!important;
+    background-color: rgb(0, 200, 147);
+    border: 0px;
+    border-radius: 5px;
+    margin-left: 5px;
+    float: right;
+}

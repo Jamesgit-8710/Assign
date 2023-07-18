@@ -1,0 +1,21 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.white{
+    color: white!important;
+}
+
+.bold{
+    font-weight: 700!important;
+}
+
+.btn{
+    height: 40px!important;
+    width: 100px!important;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: rgb(78, 131, 255);
+}

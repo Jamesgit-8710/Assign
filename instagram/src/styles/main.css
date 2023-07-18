@@ -1,0 +1,91 @@
+.homeBackGround{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(244, 245, 247);
+    overflow-y: hidden;
+}
+
+.nav{
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 30px;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid rgb(237, 237, 237);
+}
+
+.right{
+    width: 500px;
+    display: flex;
+    /* background-color: red; */
+    justify-content: space-around;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.create{
+    background-color: red!important;
+    padding: 12px 18px;
+    color: white;
+    border-radius: 40px;
+    border: 0;
+    font-weight: 600;
+}
+
+.main{
+    height: calc(100vh - 76px);
+    width: 100%;
+    /* background-color: blue; */
+    margin-top: 76px;
+    display: flex;
+}
+
+.scroll{
+    height: 100%;
+    width: 50%;
+    background-color: white;
+    overflow-y: scroll;
+    margin: auto;
+}
+
+.users{
+    height: 100%;
+    width: 20%;
+    background-color: white;
+    border: 1px solid rgb(237, 237, 237);
+}
+
+.sideBar{
+    height: calc(100vh - 97px);;
+    width: 20%;
+    background-color: white;
+    position: absolute;
+    top: 76px;
+    right: 0;
+}
+
+.list{
+    height: calc(100% - 22px);
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.item{
+    height: 50px;
+    width: 80%;
+    margin-top: 10px;
+    background-color: brown;
+}
+
+
+.list::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}

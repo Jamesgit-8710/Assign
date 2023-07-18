@@ -1,0 +1,32 @@
+.tile{
+    height: 55px;
+    /* background-color: aquamarine; */
+    padding: 15px 20px;
+    border-bottom: 2px solid #d2dce3;
+    /* margin: 0px 0px; */
+}
+
+.act{
+    background-image: linear-gradient(to right, white , rgba(255, 255, 0, 0));
+    border-left: 4px solid #FF5151;
+}
+
+.inner{
+    height: 100%;
+    width: 100%;
+    /* background-color: red; */
+    justify-content: space-between;
+}
+
+.innerRight{
+    height: 80%;
+    width: calc(100% - 50px);
+    /* background-color: rgb(255, 193, 127); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.NT{
+    justify-content: space-between!important;
+}

@@ -1,0 +1,36 @@
+.player{
+    margin: 10px;
+    margin-bottom: 50px;
+}
+
+.playerImg{
+    border-radius: 5px;
+    height: 200px;
+}
+
+.songName{
+    color: rgb(52, 49, 61);
+    margin: 10px 0px 50px;
+}
+
+.outerDiv{
+    height: 2px;
+    width: 100%;
+    background-color: rgba(198, 196, 204, 0.316);
+}
+
+.innerDiv{
+    height: 2px;
+    width: 50%;
+    background-color: rgb(52, 49, 61);
+}
+
+.fa-solid{
+    color: rgb(52, 49, 61);
+}
+
+.play{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}

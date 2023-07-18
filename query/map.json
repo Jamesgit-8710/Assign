@@ -1,0 +1,51 @@
+[
+    {
+        "name": "chandigarh",
+        "location": {
+            "type": "Point",
+            "coordinates": [76.78414567016054,30.72984395]
+        }
+    },
+    {
+        "name": "Sahibzada Ajit Singh Nagar",
+        "location": {
+            "type": "Point",
+            "coordinates": [76.7176885,30.7041168]
+        }
+    },
+    {
+        "name": "sector 67",
+        "location": {
+            "type": "Point",
+            "coordinates": [76.72837564029373,30.68173543318545]
+        }
+    },
+    {
+        "name": "sector 65",
+        "location": {
+            "type": "Point",
+            "coordinates": [76.74404943674983,30.68066949115736]
+        }
+    },
+    {
+        "name": "sector 79",
+        "location": {
+            "type": "Point",
+            "coordinates": [76.71950185981325,30.679280808405252]
+        } 
+    },
+    {
+        "name": "panchkula",
+        "location": {
+            "type": "Point",
+            "coordinates": [76.868276,30.7137692]
+        } 
+    },
+    {
+        "name": "unnamed",
+        "location": {
+            "type": "Point",
+            "coordinates": [76.86788976192094,30.70975441507217]
+        } 
+    }
+]

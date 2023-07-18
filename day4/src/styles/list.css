@@ -1,0 +1,14 @@
+.list{
+    display: flex;
+    margin-left: 35px;
+    margin-top: 60px;
+}
+
+.dayCard{
+    width: 100px!important;
+    margin-right: 30px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.298);
+    border: 0px;
+    text-align: center;
+}

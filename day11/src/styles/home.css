@@ -1,0 +1,31 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: rgb(234, 232, 239);
+}
+
+.home{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(234, 232, 239);
+    min-width: 55rem;
+}
+
+.main{
+    height: 90vh;
+    width: 75vw;
+    background-color: white;
+    box-shadow: 0 4px 18px 0 rgba(121, 121, 121, 0.1), 0 6px 20px 0 rgba(119, 119, 119, 0.1);
+    display: flex;
+    min-height: 19rem;
+    min-width: 50rem;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

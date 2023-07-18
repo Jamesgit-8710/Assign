@@ -1,0 +1,23 @@
+.login{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(234, 232, 239);
+    /* background-image: url('../assets/login.jpg'); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    height: 440px;
+    width: 430px;
+    background-color: rgba(0, 14, 62, 0.068);
+    border-radius: 15px 0px 0px 15px;
+}
+
+.pic{
+    height: 440px;
+    width: 430px;
+    background-image: url('../assets/login.jpg');
+    border-radius: 0px 15px 15px 0px;
+}
