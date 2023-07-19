@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react'
 import { message } from "antd";
 
 const Profile = ({ userData }) => {
+    console.log(userData);
     const [dis, setDis] = useState(true);
     const [vis, setVis] = useState("none");
     const id = localStorage.getItem('id');
     const [user, setUser] = useState(userData.username);
     const [pass, setPass] = useState(userData.password);
     const [messageApi, contextHolder] = message.useMessage();
+    const [get, set] = useState(true);
 
     const key = "updatable";
 
@@ -42,11 +44,18 @@ const Profile = ({ userData }) => {
             {contextHolder}
             <div style={{ height: 140, width: 140, borderRadius: "50%", backgroundColor: "grey", margin: "auto" }}></div>
             <div style={{ backgroundColor: "white", width: "50%", margin: "auto", marginTop: 40 }}>
+                {get ?
                 <Form.Item >
-                    <Button style={{ width: "100px", float: "right" }} onClick={() => { setDis(false); setVis("block"); }}>
-                        Enable
+                    <Button style={{ width: "100px", float: "right" }} onClick={() => { setDis(false); setVis("block"); set(false)}}>
+                        Update
                     </Button>
                 </Form.Item>
+                :
+                <Form.Item >
+                    <Button style={{ width: "200px", float: "right" }} onClick={() => { setDis(true); setVis("none"); set(true)}}>
+                        Don't wanna change
+                    </Button>
+                </Form.Item>}
                 <Form disabled={dis} onFinish={onFinish}>
                     <Form.Item
                         name="username"

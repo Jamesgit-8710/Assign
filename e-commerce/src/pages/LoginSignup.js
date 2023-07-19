@@ -28,6 +28,10 @@ const LoginSignup = () => {
 
     const size = 'large';
 
+    const sent = () => {
+        setChange(0);
+    }
+
     return (
         <div className='background'>
             {contextHolder}
@@ -39,7 +43,7 @@ const LoginSignup = () => {
                 <div className='innerDiv center'>
                     {
                         change ?
-                            <Signup set={setChange} val={value}/>
+                            <Signup set={setChange} val={value} sent={sent}/>
                             :
                             <Login set={setVis} />
                     }

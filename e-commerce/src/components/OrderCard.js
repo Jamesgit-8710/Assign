@@ -50,17 +50,17 @@ const OrderCard = ({item,show}) => {
                     <p style={{ fontWeight: 500, fontSize: 20, marginTop: 25 }}>
                     Payment method: <span style={{color: "rgb(180, 180, 180)"}}>{item.payMethod}</span>
                     </p>
-                    <p style={{ fontWeight: 500, fontSize: 20, marginTop: 5 }}>
+                    <p style={{ height: "60px",fontWeight: 500, fontSize: 20, marginTop: 5 ,wordBreak: "break-word",overflow: "hidden"}}>
                     Address: <span style={{color: "rgb(180, 180, 180)"}}>{item.address}</span>
                     </p>
-                    <Button type="primary" style={{ marginTop: 25, height: 40, width: 200 ,display: show? "block": "none"}} onClick={cancel} danger ghost>
+                    <Button type="primary" style={{ marginTop: 5, height: 40, width: 200 ,display: show? "block": "none"}} onClick={cancel} danger ghost>
                         Cancel order
                     </Button>
                     {
                         item.status==='c'?
-                        <p style={{fontSize: 22,fontWeight: 500,color:"red",marginTop: 30}}>Canceled</p>
+                        <p style={{fontSize: 22,fontWeight: 500,color:"red",marginTop: 10}}>Canceled</p>
                         : item.status==='s' ?
-                        <p style={{fontSize: 22,fontWeight: 500,color:"blue",marginTop: 30}}>Delivered</p>
+                        <p style={{fontSize: 22,fontWeight: 500,color:"blue",marginTop: 10}}>Delivered</p>
                         : ""
                     }
                 </div>

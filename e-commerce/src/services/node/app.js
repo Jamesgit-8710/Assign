@@ -278,15 +278,18 @@ app.post("/delete", async (req, res) => {
     console.log("chal gya");
   });
 
-  //   res.status(200).send(true);
+  //temp
+    res.status(200).send(true);
 });
 
 app.post("/stat", async (req, res) => {
   await users.findOne({ _id: req.body.id }).then((result) => {
+    console.log(result);
     res.status(200).send(result.prof);
   });
 
-  //   res.status(200).send(true);
+  //temp
+    // res.status(200).send(true);
 });
 
 app.post("/update", async (req, res) => {

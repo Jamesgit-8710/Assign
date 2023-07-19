@@ -7,7 +7,8 @@ import Admin from "./pages/Admin";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const [element, setElement] = useState(<LoginSignup />);
+  // const [element, setElement] = useState(<LoginSignup />);
+  let element = <LoginSignup />;
 
   const prof = useSelector((state) => state.users.prof);
 

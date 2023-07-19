@@ -21,11 +21,17 @@ const Login = ({ set }) => {
         // const x = values.username;
         // console.log('Success:', isNaN(values.username), x.length);
 
+        messageApi.open({
+            key,
+            type: 'loading',
+            content: 'Loading...',
+        });
+
         const res = await axios.post('http://localhost:8000/check',{user: values.username,pass: values.password})
 
-        const res2 = await axios.post('http://localhost:8000/getUser',{id:res.data});
-
+        
         if(res.data){
+            const res2 = await axios.post('http://localhost:8000/getUser',{id:res.data});
             localStorage.setItem('id', res.data)
             dispatch(addUser({id: res.data, prof: res2.data.prof}));
             messageApi.open({
@@ -57,9 +63,9 @@ const Login = ({ set }) => {
         const user = result.user;
         const res = await axios.post('http://localhost:8000/exist',{user: user.email})
 
-        const res2 = await axios.post('http://localhost:8000/getUser',{id:res.data});
-
+        
         if(res.data){
+            const res2 = await axios.post('http://localhost:8000/getUser',{id:res.data});
             localStorage.setItem('id', res.data)
             dispatch(addUser({id: res.data, prof: res2.data.prof}));
             messageApi.open({

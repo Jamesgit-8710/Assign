@@ -18,7 +18,6 @@ const VendorCard = ({ item }) => {
   const [prof, setProf] = useState(x);
 
   const handleMenuClick = async (e) => {
-    message.info("Click on menu item.");
 
     if (e.key === "1") {
       setProf("Active");

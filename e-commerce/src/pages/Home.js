@@ -22,11 +22,14 @@ import BestSeller from "../components/BestSeller";
 import Cart from "../components/Cart";
 import CosOrders from "../components/CosOrders";
 import close from '../assets/close2.png';
+import { del } from "../services/slices/user.slice";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const id = localStorage.getItem("id");
 
   const [navigation, setNavigation] = useState(0);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const [val, setVal] = useState(0);
@@ -34,7 +37,7 @@ const Home = () => {
   const [vis, setVis] = useState("none");
   const [vis2, setVis2] = useState("none");
   const [data, setData] = useState([]);
-  const [stat, setStat] = useState("");
+  const [stat, setStat] = useState(false);
   const [userData, setUserData] = useState({});
   const [search, setSearch] = useState("");
   const [modal, setModal] = useState({});
@@ -101,7 +104,8 @@ const Home = () => {
       // console.log(res.data);
       const res2 = await axios.post("http://localhost:8000/stat", { id: id });
       setStat(res2.data);
-
+      console.log(res2.data);
+      
       const res3 = await axios.post("http://localhost:8000/getUser", {
         id: id,
       });
@@ -125,7 +129,7 @@ const Home = () => {
           <div style={{ height: "100%", width: "50%", padding: 20 }}>
             <div style={{ height: "70%", width: "100%", backgroundColor: "white" }}>
               <p style={{ fontSize: 40, fontWeight: 500 }}>{modal.productName}</p>
-              <p style={{ fontSize: 20, fontWeight: 500, color: "rgba(0,0,0,0.4)" }}>{modal.des}</p>
+              <p style={{ fontSize: 20, fontWeight: 500, color: "rgba(0,0,0,0.4)" ,wordBreak: "break-word"}}>{modal.des}</p>
               <br />
               <p style={{ fontSize: 30, fontWeight: 500 }}>&#8377;{modal.price}</p>
             </div>
@@ -158,6 +162,7 @@ const Home = () => {
                 borderRadius: 50,
                 height: 35,
                 minWidth: "11rem",
+                display: navigation===1? "none":"block"
               }}
               onChange={(e) => {
                 setSearch(e.target.value);
@@ -427,6 +432,7 @@ const Home = () => {
             style={{ display: "flex", marginTop: 15, cursor: "pointer" }}
             onClick={() => {
               localStorage.removeItem("id");
+              dispatch(del());
             }}
           >
             <img src={logout} height={18} />

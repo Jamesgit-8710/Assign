@@ -34,6 +34,9 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../services/firbase.auth";
 import AdminOrders from "../components/AdminOrders";
 import VenHistory from "../components/VenHistory";
+import { useDispatch } from "react-redux";
+import { del } from "../services/slices/user.slice";
+import img from '../assets/image.png'
 
 function getItem(label, key, icon, click) {
   return {
@@ -85,6 +88,8 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
 
   const id = localStorage.getItem("id");
+
+  const dispatch = useDispatch();
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -173,22 +178,32 @@ const Admin = () => {
 
   const handleOk2 = () => {
     if (name !== "" && price !== "" && qty !== "" && des !== "" && cat !== "") {
-      const res = axios.post("http://localhost:8000/addProduct", {
-        name: name,
-        price: price,
-        qty: qty,
-        des: des,
-        cat: cat,
-        uploadedBy: id,
-        status: "d",
-      });
-      messageApi.open({
-        key,
-        type: "success",
-        content: "Uploaded!",
-        duration: 2,
-      });
-      setOpen(false);
+      if (files.length === 4) {
+        const res = axios.post("http://localhost:8000/addProduct", {
+          name: name,
+          price: price,
+          qty: qty,
+          des: des,
+          cat: cat,
+          uploadedBy: id,
+          status: "d",
+          images: files,
+        });
+        messageApi.open({
+          key,
+          type: "success",
+          content: "Uploaded!",
+          duration: 2,
+        });
+        setOpen(false);
+      } else {
+        messageApi.open({
+          key,
+          type: "warning",
+          content: "Select at least 4 images!",
+          duration: 2,
+        });
+      }
     } else {
       messageApi.open({
         key,
@@ -266,6 +281,11 @@ const Admin = () => {
     setVal(Number(e));
   };
 
+  const out = () => {
+    localStorage.removeItem("id");
+    dispatch(del());
+  }
+
   return (
     <div>
       {contextHolder}
@@ -314,7 +334,7 @@ const Admin = () => {
                     marginRight: 60,
                     cursor: "pointer",
                   }}
-                  onClick={() => {setVal(5)}}
+                  onClick={() => {setVal(6)}}
                 >
                   Order history
                 </p> : ""}
@@ -339,7 +359,8 @@ const Admin = () => {
             <AdminOrders />
           ) : val === 4 ? (
             <Profile userData={userData} />
-          ) : val === 5 ? 
+          ) : val === 5 ? out()
+          : val === 6 ? 
           <VenHistory orderVis={true}/> 
           : (
             <div
@@ -467,7 +488,7 @@ const Admin = () => {
 
                 {files.length !== 4 ? (
                   <div
-                    style={{ height: 100, width: 100, backgroundColor: "grey" }}
+                  style={{ height: 110, width: 110, backgroundColor: "rgb(241, 243, 245)",border: "1px dashed rgb(200, 200, 200)",borderRadius: 10,backgroundImage: `url(${img})`,backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}
                   >
                     <input
                       type="file"

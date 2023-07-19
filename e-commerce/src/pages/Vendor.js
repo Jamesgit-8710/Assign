@@ -11,6 +11,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../services/firbase.auth";
 import VenOrders from "../components/VenOrders";
 import VenHistory from "../components/VenHistory";
+import img from '../assets/image.png'
 
 const Vendor = () => {
   const [loading, setLoading] = useState(false);
@@ -398,7 +399,7 @@ const Vendor = () => {
             })}
 
             {files.length !== 4 ? (
-              <div style={{ height: 110, width: 110, backgroundColor: "rgb(241, 243, 245)",border: "1px dashed rgb(200, 200, 200)",borderRadius: 10}}>
+              <div style={{ height: 110, width: 110, backgroundColor: "rgb(241, 243, 245)",border: "1px dashed rgb(200, 200, 200)",borderRadius: 10,borderRadius: 10,backgroundImage: `url(${img})`,backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
                 <input
                   type="file"
                   onChange={set}

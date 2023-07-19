@@ -8,7 +8,7 @@ import { auth, provider } from '../services/firbase.auth';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import axios from 'axios';
 
-const Signup = ({ set , val }) => {
+const Signup = ({ set , val, sent }) => {
 
     const key = 'updatable';
 
@@ -31,6 +31,9 @@ const Signup = ({ set , val }) => {
                     content: 'Successful',
                     duration: 2,
                 });
+                setTimeout(() => {
+                    set();
+                }, 1000);
 
                 const res = await axios.post('http://localhost:8000/user',{user,pass,val})
             })
@@ -83,6 +86,9 @@ const Signup = ({ set , val }) => {
                 content: 'Successful',
                 duration: 2,
             });
+            setTimeout(() => {
+                set();
+            }, 1000);
         }
 
     }
@@ -145,6 +151,11 @@ const Signup = ({ set , val }) => {
                 content: 'Successful',
                 duration: 2,
             });
+
+            setTimeout(() => {
+                set();
+            }, 1000);
+
         }
       }).catch((error) => {
         console.log(error);

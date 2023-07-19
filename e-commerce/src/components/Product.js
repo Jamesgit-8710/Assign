@@ -117,7 +117,7 @@ const Product = ({ item, show, set }) => {
         hoverable
         style={{ width: 280 }}
         cover={<img alt="example" src={item.images[0]} height={300} />}
-        onClick={() => {set(item)}}
+        onClick={() => {if(show)set(item)}}
       >
         <Meta title={item.productName} description={item.des} />
         <p style={{ fontWeight: 500, fontSize: 20, marginTop: 10 }}>
