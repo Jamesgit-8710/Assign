@@ -39,10 +39,10 @@ const Item = ({ item, awoke, show}) => {
 
   const cancel = async() => {
     const res = await axios.post("http://localhost:8000/updateOrder", {
-      id: item.itemId,
+      id: item._id,
       data: "c",
     });
-    console.log("first")
+    console.log(item.itemId)
     // const res2 = await axios.post("http://localhost:8000/d", { id: item.itemId, c: item.count });
   };
 

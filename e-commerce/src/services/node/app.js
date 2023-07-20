@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   prof: String,
   cart: Array,
   status: Boolean,
-  date: String
+  date: String,
 });
 
 const users = mongoose.model("users", userSchema);
@@ -36,7 +36,7 @@ const prodSchema = new mongoose.Schema({
   uploadedBy: String,
   status: String,
   images: Array,
-  sellCount: Number
+  sellCount: Number,
 });
 
 const product = mongoose.model("product", prodSchema);
@@ -63,7 +63,7 @@ app.post("/user", async (req, res) => {
   user.prof = req.body.val;
   user.cart = [];
   user.status = true;
-  user.date = req.body.date
+  user.date = req.body.date;
 
   await user.save();
 
@@ -93,9 +93,8 @@ app.post("/exist", async (req, res) => {
 });
 
 app.post("/checkActive", async (req, res) => {
-
-  await users.find({_id: req.body.id}).then((result) => {
-    res.status(200).send(result)
+  await users.find({ _id: req.body.id }).then((result) => {
+    res.status(200).send(result);
   });
 
   //   res.status(200).send(true);
@@ -146,10 +145,12 @@ app.post("/addProduct", async (req, res) => {
   //   res.status(200).send(true);
 });
 
-app.post("/d", async(req, res) => {
+app.post("/d", async (req, res) => {
+  await product.updateOne(
+    { _id: req.body.id },
+    { $inc: { sellCount: -req.body.c } }
+  );
 
-  await product.updateOne({_id: req.body.id},{$inc: {sellCount: -req.body.c}})
-  
   res.status(200).send(true);
 
   //   res.status(200).send(true);
@@ -173,11 +174,11 @@ app.post("/addOrder", (req, res) => {
 
     await ordr.save();
 
-    await product.updateOne({_id: item.itemId},{$inc: {sellCount: c}})
+    await product.updateOne({ _id: item.itemId }, { $inc: { sellCount: c } });
 
-    await product.updateOne({_id: item.itemId},{$inc: {qty: -c}})
+    await product.updateOne({ _id: item.itemId }, { $inc: { qty: -c } });
   });
-  
+
   res.status(200).send(true);
 
   //   res.status(200).send(true);
@@ -208,7 +209,6 @@ app.post("/orderData", async (req, res) => {
 });
 
 app.post("/allOrderamount", async (req, res) => {
-
   await order.find({}).then((result) => {
     // console.log(result[0].cart);
     let sum = 0;
@@ -237,7 +237,6 @@ app.post("/getTrack", async (req, res) => {
 });
 
 app.post("/Orderamount", async (req, res) => {
-
   await order.find({ vendor: req.body.id }).then((result) => {
     // console.log(result[0].cart);
     let sum = 0;
@@ -297,7 +296,7 @@ app.post("/delete", async (req, res) => {
   });
 
   //temp
-    res.status(200).send(true);
+  res.status(200).send(true);
 });
 
 app.post("/stat", async (req, res) => {
@@ -307,7 +306,7 @@ app.post("/stat", async (req, res) => {
   });
 
   //temp
-    // res.status(200).send(true);
+  // res.status(200).send(true);
 });
 
 app.post("/update", async (req, res) => {
@@ -330,11 +329,10 @@ app.post("/updateTrack", async (req, res) => {
 });
 
 app.post("/updateOrder", async (req, res) => {
-  // console.log(req.body)
 
   await order.updateOne(
     { _id: req.body.id },
-    { $set: { status: req.body.data } }
+    {status: req.body.data}
   );
 
   res.status(200).send(true);
