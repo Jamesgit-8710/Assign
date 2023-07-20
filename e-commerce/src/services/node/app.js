@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema({
   cart: Array,
   status: Boolean,
   date: String,
+  profile: String
 });
 
 const users = mongoose.model("users", userSchema);
@@ -64,6 +65,7 @@ app.post("/user", async (req, res) => {
   user.cart = [];
   user.status = true;
   user.date = req.body.date;
+  user.profile = ""
 
   await user.save();
 
@@ -315,6 +317,24 @@ app.post("/update", async (req, res) => {
   await product.updateOne({ _id: req.body.id }, { $set: req.body.data });
 
   res.status(200).send(true);
+});
+
+app.post("/setImg", async (req, res) => {
+  // console.log(req.body)
+
+  await users.updateOne({ _id: req.body.id }, { $set: {profile: req.body.data} });
+
+  res.status(200).send(true);
+});
+
+app.post("/getImg", async (req, res) => {
+  // console.log(req.body)
+
+  await users.findOne({ _id: req.body.id }).then((data) => {
+    res.status(200).send(data.profile)
+  });
+
+  // res.status(200).send(true);
 });
 
 app.post("/updateTrack", async (req, res) => {
