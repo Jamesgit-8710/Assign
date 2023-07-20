@@ -15,6 +15,7 @@ const Profile = ({ userData }) => {
   const [pass, setPass] = useState(userData.password);
   const [messageApi, contextHolder] = message.useMessage();
   const [get, set] = useState(true);
+  const [abc, setAbc] = useState(u);
 
   const key = "updatable";
 
@@ -71,21 +72,24 @@ const Profile = ({ userData }) => {
         data: imgUrl,
       });
 
+      setAbc(imgUrl)
+
      
     }
   };
 
-//   useEffect(() => {
-//     const call = async() => {
-//         const res = await axios.post("http://localhost:8000/getImg", {
-//         id: id
-//       });
+  useEffect(() => {
+    const call = async() => {
+        const res = await axios.post("http://localhost:8000/getImg", {
+        id: id
+    });
 
-//       if(res.data!=="")
+      if(res.data!=="")
+      setAbc(res.data);
 
-//     }
-//     call();
-//   })
+    }
+    call();
+  })
 
   return (
     <div
@@ -106,7 +110,7 @@ const Profile = ({ userData }) => {
           borderRadius: "50%",
           backgroundColor: "rgb(230, 230, 230)",
           margin: "auto",
-          backgroundImage: `url(${u})`,
+          backgroundImage: `url('${abc}')`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
