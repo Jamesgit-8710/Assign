@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   // const [element, setElement] = useState(<LoginSignup />);
+
   let element = <LoginSignup />;
 
   const prof = useSelector((state) => state.users.prof);
@@ -16,6 +17,7 @@ const App = () => {
     element = <Home />
   else if (prof === 'a')
     element = <Admin />
+
 
   return (
     // <LoginSignup/>

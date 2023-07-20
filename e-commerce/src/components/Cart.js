@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Item from "./Item";
 import axios from "axios";
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Empty, Form, Input, Modal } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { Radio } from "antd";
 import { message } from "antd";
@@ -26,17 +26,20 @@ const Cart = () => {
   const [number, setNumber] = useState("");
   const [vis, setVis] = useState("none");
   const [vis2, setVis2] = useState("none");
+  const [u, setU] = useState("");
 
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
 
-  const handleOk = async() => {
+  const handleOk = async(e) => {
     console.log(number);
-    if (address !== "" && value !== 0) {
+    if (address.trim() !== "" && value !== 0) {
       if (value === 1) {
+        setU(e);
         setConfirmLoading(true);
+        setVis2("none")
 
         const res = await axios.post("http://localhost:8000/addOrder", {data: data,id: id,status: 'd',payMethod: "cod",address: address});
 
@@ -54,7 +57,9 @@ const Cart = () => {
           }, 2000);
         }, 1000);
       } else if (value === 2 && number !== "") {
+        setU(e);
         setConfirmLoading(true);
+        setVis2("none")
 
         const res = await axios.post("http://localhost:8000/addOrder", {data: data,id: id,status: 'd',payMethod: "card",address: address});
 
@@ -121,8 +126,8 @@ const Cart = () => {
     };
 
     call();
-  }, [val]);
-
+  }, [val,u]);
+   
   return (
     <div
       style={{
@@ -141,8 +146,9 @@ const Cart = () => {
         Shopping Cart
       </p>
 
-      {data.map((i) => {
-        return <Item item={i} awoke={awoke} show={true}/>;
+      {data.length===0?<div style={{height: "30%",width: "100%",backgroundColor: "white",paddingTop: 120,margin: "auto"}}><Empty description='Cart is empty!'/></div>:
+      data.map((i) => {
+        return <Item item={i} awoke={awoke} show={true} />;
       })}
 
       <div
@@ -157,7 +163,7 @@ const Cart = () => {
           borderTop: "1px solid rgb(241, 243, 245)",
         }}
       >
-        <p style={{ fontSize: 23, fontWeight: 500 }}>
+        <p style={{ fontSize: 23, fontWeight: 500 ,display: "                                "}}>
           Total Amount: &#8377;{amount}
         </p>
         <Button

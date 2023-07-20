@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Dropdown, message, Space } from "antd";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setSS } from "../services/slices/user.slice";
 
 const VendorCard = ({ item }) => {
   const id = localStorage.getItem("id");
   let x = "";
+  const dispatch = useDispatch();
 
   const [stat, setStat] = useState(item.status);
 
@@ -68,7 +71,7 @@ const VendorCard = ({ item }) => {
           style={{
             height: 10,
             width: 10,
-            backgroundColor: stat ? "green" : "red",
+            backgroundColor: stat ? "rgb(55, 255, 145)" : "red",
             borderRadius: "50%",
             margin: "7px 10px 0px",
 

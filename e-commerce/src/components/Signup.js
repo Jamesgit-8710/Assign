@@ -35,7 +35,7 @@ const Signup = ({ set , val, sent }) => {
                     set();
                 }, 1000);
 
-                const res = await axios.post('http://localhost:8000/user',{user,pass,val})
+                const res = await axios.post('http://localhost:8000/user',{user,pass,val,date: Date().toString()})
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -79,7 +79,7 @@ const Signup = ({ set , val, sent }) => {
                 duration: 2,
             });
         }else{
-            const res2 = await axios.post('http://localhost:8000/user',{user,pass,val})
+            const res2 = await axios.post('http://localhost:8000/user',{user,pass,val,date: Date().toString()})
             messageApi.open({
                 key,
                 type: 'success',
@@ -144,7 +144,7 @@ const Signup = ({ set , val, sent }) => {
             });
         }else{
             console.log(val)
-            const res2 = await axios.post('http://localhost:8000/user',{user: user.email, pass: "", val: val})
+            const res2 = await axios.post('http://localhost:8000/user',{user: user.email, pass: "", val: val,date: Date().toString()})
             messageApi.open({
                 key,
                 type: 'success',

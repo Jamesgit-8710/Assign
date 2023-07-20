@@ -2,6 +2,7 @@ import { Button, Form, Input } from 'antd'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { message } from "antd";
+import u from '../assets/user.png'
 
 const Profile = ({ userData }) => {
     console.log(userData);
@@ -42,7 +43,7 @@ const Profile = ({ userData }) => {
     return (
         <div style={{ height: "calc(100vh - 105px)", width: "60vw", margin: "auto", backgroundColor: "white", paddingTop: 30, borderTop: "1px solid rgb(241, 243, 245)" }}>
             {contextHolder}
-            <div style={{ height: 140, width: 140, borderRadius: "50%", backgroundColor: "grey", margin: "auto" }}></div>
+            <div style={{ height: 140, width: 140, borderRadius: "50%", backgroundColor: "rgb(230, 230, 230)", margin: "auto",backgroundImage: `url(${u})`,backgroundSize: "contain",backgroundRepeat: "no-repeat",backgroundPosition: "center"}}></div>
             <div style={{ backgroundColor: "white", width: "50%", margin: "auto", marginTop: 40 }}>
                 {get ?
                 <Form.Item >

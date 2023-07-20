@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import OrderCard from "./OrderCard";
 import axios from "axios";
+import { Empty } from "antd";
 
 const VenOrders = () => {
   const id = localStorage.getItem('id');
   const [data, setData] = useState([]);
   const [amount, setAmount] = useState(0);
+  const [u, setU] = useState("")
 
   useEffect(() => {
     const getData = async () => {
@@ -17,8 +19,11 @@ const VenOrders = () => {
     };
 
     getData();
-  }, []);
+  }, [u]);
   console.log(amount);
+
+  const f = data.filter((i) => i.status==='d' && i.vendor===id)
+
   return (
     <div
       style={{
@@ -31,9 +36,10 @@ const VenOrders = () => {
       }}
       className="cart"
     >
-      {data.map((i) => {
+      {f.length===0?<div style={{height: "50vh",width: "90%",backgroundColor: "white",paddingTop: 200,margin: "auto"}}><Empty description='No Orders'/></div>:
+      data.map((i) => {
         if(i.status==='d' && i.vendor===id)
-        return <OrderCard item={i} show={true}/>;
+        return <OrderCard item={i} show={true} setU={setU}/>;
       })}
       <div style={{height: 100,width: "100vw"}}></div>
       <div style={{width: "100vw", backgroundColor: "white",position: "absolute",bottom: 0,fontSize: 25,fontWeight: 500,display: "flex", justifyContent: "space-between",padding: 15}}>

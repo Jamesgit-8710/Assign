@@ -9,7 +9,7 @@ import img2 from "../assets/dispatched.gif";
 import img3 from "../assets/ontheway.webp";
 import img5 from "../assets/delivered.gif";
 
-const Item = ({ item, awoke, show }) => {
+const Item = ({ item, awoke, show}) => {
   const id = localStorage.getItem("id");
 
   const [data, setData] = useState([{ price: 0, images: [] }]);
@@ -22,25 +22,28 @@ const Item = ({ item, awoke, show }) => {
 
   const key = "updatable";
 
-  const rmv = async () => {
+  const rmv = async (e) => {
     const res = await axios.post("http://localhost:8000/deleteItem", {
       id: id,
       itemId: item.itemId,
     });
-
+    
     messageApi.open({
       key,
       type: "success",
       content: "Removed!",
       duration: 2,
     });
+    
   };
 
-  const cancel = async () => {
+  const cancel = async() => {
     const res = await axios.post("http://localhost:8000/updateOrder", {
-      id: item._id,
+      id: item.itemId,
       data: "c",
     });
+    console.log("first")
+    // const res2 = await axios.post("http://localhost:8000/d", { id: item.itemId, c: item.count });
   };
 
   const track = async () => {
@@ -64,6 +67,8 @@ const Item = ({ item, awoke, show }) => {
     call();
   }, []);
 
+  // console.log(data)
+
   return (
     <>
       <div
@@ -81,7 +86,7 @@ const Item = ({ item, awoke, show }) => {
             style={{
               height: 150,
               width: 130,
-              backgroundImage: `url('${data[0].images[0]}')`,
+              backgroundImage: `url('${data[0]?.images[0]}')`,
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
@@ -89,7 +94,7 @@ const Item = ({ item, awoke, show }) => {
           ></div>
           <div style={{ marginLeft: 20 }}>
             <p style={{ fontSize: 20 }}>{data[0]?.productName}</p>
-            <p style={{ color: "rgb(180, 180, 180)" }}>{data[0]?.des}</p>
+            <p style={{ width: "500px",color: "rgb(180, 180, 180)" ,overflow: "hidden"}}>{data[0]?.des}</p>
             <p style={{ fontWeight: 500, fontSize: 20, marginTop: 10 }}>
               &#8377;{data[0]?.price}
             </p>
@@ -115,23 +120,18 @@ const Item = ({ item, awoke, show }) => {
             <div style={{ display: show ? "none" : "flex" }}>
               {item.status === "d" ? (
                 <>
-                  <Button
-                    type="primary"
-                    style={{ marginTop: 32, width: 150 }}
+                  <button
+                    style={{ marginTop: 32, height: 32,width: 150,borderRadius: 7,color: "red",border: "1px solid red",backgroundColor: "white" }}
                     onClick={cancel}
-                    danger
-                    ghost
                   >
                     Cancel order
-                  </Button>
-                  <Button
-                    type="primary"
-                    style={{ width: 150, marginTop: 32, marginLeft: 40 }}
+                  </button  >
+                  <button
+                    style={{ width: 150, height: 32,marginTop: 32, marginLeft: 40,borderRadius: 7,color: "blue",border: "1px solid blue",backgroundColor: "white" }}
                     onClick={track}
-                    ghost
                   >
                     Track order
-                  </Button>
+                  </button>
                 </>
               ) : item.status === "c" ? (
                 <p

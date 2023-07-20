@@ -7,7 +7,7 @@ import { message } from 'antd';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../services/firbase.auth';
 import { useDispatch } from 'react-redux';
-import { addUser } from '../services/slices/user.slice';
+import { addUser, setSS } from '../services/slices/user.slice';
 // import validator from 'validator'
 
 const Login = ({ set }) => {
@@ -17,7 +17,7 @@ const Login = ({ set }) => {
     const [messageApi, contextHolder] = message.useMessage();
     const dispatch = useDispatch();
 
-    const onFinish = async(values) => {
+    const onFinish = async (values) => {
         // const x = values.username;
         // console.log('Success:', isNaN(values.username), x.length);
 
@@ -27,20 +27,31 @@ const Login = ({ set }) => {
             content: 'Loading...',
         });
 
-        const res = await axios.post('http://localhost:8000/check',{user: values.username,pass: values.password})
+        const res = await axios.post('http://localhost:8000/check', { user: values.username, pass: values.password })
 
-        
-        if(res.data){
-            const res2 = await axios.post('http://localhost:8000/getUser',{id:res.data});
-            localStorage.setItem('id', res.data)
-            dispatch(addUser({id: res.data, prof: res2.data.prof}));
-            messageApi.open({
-                key,
-                type: 'success',
-                content: 'Welcome!',
-                duration: 2,
-            });
-        }else{
+
+        if (res.data) {
+            const res3 = await axios.post('http://localhost:8000/checkActive', { id: res.data });
+
+            if (res3.data[0].status) {
+                const res2 = await axios.post('http://localhost:8000/getUser', { id: res.data });
+                localStorage.setItem('id', res.data)
+                dispatch(addUser({ id: res.data, prof: res2.data.prof}));
+                messageApi.open({
+                    key,
+                    type: 'success',
+                    content: 'Welcome!',
+                    duration: 2,
+                });
+            } else {
+                messageApi.open({
+                    key,
+                    type: 'warning',
+                    content: 'Your account is Disabled!',
+                    duration: 2,
+                });
+            }
+        } else {
             // const res2 = await axios.post('http://localhost:8000/user',{user,pass,val})
             messageApi.open({
                 key,
@@ -57,34 +68,45 @@ const Login = ({ set }) => {
         console.log('Failed:', errorInfo);
     };
 
-    const logInGoogle = async() => {
+    const logInGoogle = async () => {
         await signInWithPopup(auth, provider)
-      .then(async (result) => {
-        const user = result.user;
-        const res = await axios.post('http://localhost:8000/exist',{user: user.email})
+            .then(async (result) => {
+                const user = result.user;
+                const res = await axios.post('http://localhost:8000/exist', { user: user.email })
 
-        
-        if(res.data){
-            const res2 = await axios.post('http://localhost:8000/getUser',{id:res.data});
-            localStorage.setItem('id', res.data)
-            dispatch(addUser({id: res.data, prof: res2.data.prof}));
-            messageApi.open({
-                key,
-                type: 'success',
-                content: 'Welcome!',
-                duration: 2,
+
+                if (res.data) {
+                    const res3 = await axios.post('http://localhost:8000/checkActive', { id: res.data });
+
+                    if (res3.data[0].status) {
+                        const res2 = await axios.post('http://localhost:8000/getUser', { id: res.data });
+                        localStorage.setItem('id', res.data)
+                        dispatch(addUser({ id: res.data, prof: res2.data.prof }));
+                        messageApi.open({
+                            key,
+                            type: 'success',
+                            content: 'Welcome!',
+                            duration: 2,
+                        });
+                    } else {
+                        messageApi.open({
+                            key,
+                            type: 'warning',
+                            content: 'Your account is Disabled!',
+                            duration: 2,
+                        });
+                    }
+                } else {
+                    messageApi.open({
+                        key,
+                        type: 'warning',
+                        content: 'User not found!',
+                        duration: 2,
+                    });
+                }
+            }).catch((error) => {
+                console.log(error);
             });
-        }else{
-            messageApi.open({
-                key,
-                type: 'warning',
-                content: 'User not found!',
-                duration: 2,
-            });
-        }
-      }).catch((error) => {
-        console.log(error);
-      });
     }
 
     return (

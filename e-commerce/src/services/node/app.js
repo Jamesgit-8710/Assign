@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema({
   prof: String,
   cart: Array,
   status: Boolean,
+  date: String
 });
 
 const users = mongoose.model("users", userSchema);
@@ -62,6 +63,7 @@ app.post("/user", async (req, res) => {
   user.prof = req.body.val;
   user.cart = [];
   user.status = true;
+  user.date = req.body.date
 
   await user.save();
 
@@ -86,6 +88,15 @@ app.post("/exist", async (req, res) => {
   } else {
     res.send(false);
   }
+
+  //   res.status(200).send(true);
+});
+
+app.post("/checkActive", async (req, res) => {
+
+  await users.find({_id: req.body.id}).then((result) => {
+    res.status(200).send(result)
+  });
 
   //   res.status(200).send(true);
 });
@@ -135,6 +146,15 @@ app.post("/addProduct", async (req, res) => {
   //   res.status(200).send(true);
 });
 
+app.post("/d", async(req, res) => {
+
+  await product.updateOne({_id: req.body.id},{$inc: {sellCount: -req.body.c}})
+  
+  res.status(200).send(true);
+
+  //   res.status(200).send(true);
+});
+
 app.post("/addOrder", (req, res) => {
   req.body.data.forEach(async (item) => {
     const ordr = new order();
@@ -157,9 +177,7 @@ app.post("/addOrder", (req, res) => {
 
     await product.updateOne({_id: item.itemId},{$inc: {qty: -c}})
   });
-
-
-
+  
   res.status(200).send(true);
 
   //   res.status(200).send(true);

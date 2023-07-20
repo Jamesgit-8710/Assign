@@ -11,7 +11,7 @@ import { PlusOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
-const Product = ({ item, show, set }) => {
+const Product = ({ item, show, set, setU, d }) => {
   const size = "large";
   const key = "updatable";
   const id = localStorage.getItem("id");
@@ -38,7 +38,7 @@ const Product = ({ item, show, set }) => {
 
   const [open, setOpen] = useState(false);
 
-  const handleOk = async () => {
+  const handleOk = async (e) => {
     const res = await axios.post("http://localhost:8000/update", {
       id: item._id,
       data: { productName: name, price: price, des: des, qty: qty, cat: cat },
@@ -50,9 +50,10 @@ const Product = ({ item, show, set }) => {
       duration: 2,
     });
     setOpen(false);
+    d(e);
   };
 
-  const handleOk2 = async () => {
+  const handleOk2 = async (e) => {
     const res = await axios.post("http://localhost:8000/update", {
       id: item._id,
       data: { status: "p" },
@@ -64,6 +65,7 @@ const Product = ({ item, show, set }) => {
       duration: 2,
     });
     setOpen(false);
+    d(e);
   };
 
   const handleCancel = () => {
@@ -71,7 +73,7 @@ const Product = ({ item, show, set }) => {
     setOpen(false);
   };
 
-  const rmv = () => {
+  const rmv = (e) => {
     const res = axios.post("http://localhost:8000/delete", { id: item._id });
     messageApi.open({
       key,
@@ -79,6 +81,7 @@ const Product = ({ item, show, set }) => {
       content: "Item deleted!",
       duration: 2,
     });
+    d(e);
   };
 
   const showModal = () => {
@@ -93,6 +96,7 @@ const Product = ({ item, show, set }) => {
 
   const add = async (e) => {
     e.stopPropagation();
+    setU(e)
     const res = await axios.post("http://localhost:8000/cart", {
       id: id,
       data: {
@@ -160,7 +164,7 @@ const Product = ({ item, show, set }) => {
               display: show ? "block" : "none",
             }}
             disabled={dis}
-            onClick={add}
+            onClick={add} 
           >
             {dis ? "Added to Cart" : "Add to cart"}
           </Button>

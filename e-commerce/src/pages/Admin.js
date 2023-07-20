@@ -12,6 +12,7 @@ import {
   Button,
   Divider,
   Dropdown,
+  Empty,
   Form,
   Input,
   Menu,
@@ -53,36 +54,8 @@ const items = [
   getItem("Orders", "3", <DropboxOutlined />),
   getItem("Profile", "4", <UserOutlined />),
   getItem("Logout", "5", <LogoutOutlined />),
-  // getItem('Navigation Two', 'sub1', <AppstoreOutlined />, [
-  //     getItem('Option 3', '3'),
-  //     getItem('Option 4', '4'),
-  //     getItem('Submenu', 'sub1-2', null, [getItem('Option 5', '5'), getItem('Option 6', '6')]),
-  // ]),
-  // getItem('Navigation Three', 'sub2', <SettingOutlined />, [
-  //     getItem('Option 7', '7'),
-  //     getItem('Option 8', '8'),
-  //     getItem('Option 9', '9'),
-  //     getItem('Option 10', '10'),
-  // ]),
-  // getItem(
-  //     <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-  //         Ant Design
-  //     </a>,
-  //     'link',
-  //     <LinkOutlined />,
-  // ),
+ 
 ];
-
-// const i = [
-//     {
-//         label: "Published",
-//         key: "1",
-//     },
-//     {
-//         label: "Draft",
-//         key: "2",
-//     },
-// ];
 
 const Admin = () => {
   const [loading, setLoading] = useState(false);
@@ -116,6 +89,7 @@ const Admin = () => {
   const [userData, setUserData] = useState({});
   const [files, setFiles] = useState([]);
   const [val2, setVal2] = useState("p");
+  const [u, setU] = useState("");
 
   // const [val2, setVal2] = useState("Published");
   // const [val3, setVal3] = useState("p");
@@ -130,9 +104,9 @@ const Admin = () => {
 
   const showModal = () => {
     setOpen(true);
-  };
+  };  
 
-  const handleOk = () => {
+  const handleOk = (e) => {
     if (name !== "" && price !== "" && qty !== "" && des !== "" && cat !== "") {
       if (files.length === 4) {
         const res = axios.post("http://localhost:8000/addProduct", {
@@ -152,6 +126,7 @@ const Admin = () => {
           duration: 2,
         });
         setOpen(false);
+        setU(e);
       } else {
         messageApi.open({
           key,
@@ -176,7 +151,7 @@ const Admin = () => {
     // }, 2000);
   };
 
-  const handleOk2 = () => {
+  const handleOk2 = (e) => {
     if (name !== "" && price !== "" && qty !== "" && des !== "" && cat !== "") {
       if (files.length === 4) {
         const res = axios.post("http://localhost:8000/addProduct", {
@@ -196,6 +171,7 @@ const Admin = () => {
           duration: 2,
         });
         setOpen(false);
+        setU(e)
       } else {
         messageApi.open({
           key,
@@ -275,7 +251,7 @@ const Admin = () => {
     };
 
     getData();
-  }, []);
+  }, [u]);
 
   const setKey = (e) => {
     setVal(Number(e));
@@ -285,6 +261,8 @@ const Admin = () => {
     localStorage.removeItem("id");
     dispatch(del());
   }
+
+  const f = val2==='p'?data.filter((i) => i.status === "p" && val2 === "p"):data.filter((i) => i.uploadedBy === id && i.status === val2)
 
   return (
     <div>
@@ -373,11 +351,12 @@ const Admin = () => {
                 overflow: "scroll",
               }}
             >
-              {data.map((i, index) => {
+              {f.length===0?<div style={{height: "30%",width: "100%",backgroundColor: "white",paddingTop: 200,margin: "auto"}}><Empty description='No Product'/></div>:
+              data.map((i, index) => {
                 if (i.status === "p" && val2 === "p")
-                  return <Product item={i} show={false} />;
+                  return <Product item={i} show={false} d={setU}/>;
                 else if (i.uploadedBy === id && i.status === val2)
-                  return <Product item={i} show={false} />;
+                  return <Product item={i} show={false} d={setU}/>;
               })}
             </div>
           )}

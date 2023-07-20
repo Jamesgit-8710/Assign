@@ -24,6 +24,7 @@ import CosOrders from "../components/CosOrders";
 import close from '../assets/close2.png';
 import { del } from "../services/slices/user.slice";
 import { useDispatch } from "react-redux";
+import { Empty } from 'antd';
 
 const Home = () => {
   const id = localStorage.getItem("id");
@@ -43,6 +44,7 @@ const Home = () => {
   const [modal, setModal] = useState({});
   const [img, setImg] = useState()
   const [slt, setSlt] = useState("Category")
+  const [u, setU] = useState("");
 
   const onClick = ({ key }) => {
     // message.info(`Click on item ${key}`);
@@ -112,8 +114,10 @@ const Home = () => {
       setUserData(res3.data);
     };
 
-    getData();
-  }, []);
+    getData();  
+  }, [u]);
+
+  const f = data.filter((i) => i.status === "p" && i.uploadedBy !== id)
 
 
 
@@ -181,6 +185,7 @@ const Home = () => {
               }}
               onClick={() => {
                 setNavigation(0);
+                setSearch("");
               }}
             >
               Home
@@ -363,9 +368,10 @@ const Home = () => {
             >
               <h1 style={{ marginBottom: 40, marginLeft: 15 }}>Products</h1>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {filtered.map((i) => {
+                {f.length===0?<div style={{height: 400,width: "100vw",backgroundColor: "white",paddingTop: 200}}><Empty description='No Product'/></div>:
+                filtered.map((i) => {
                   if (i.status === "p" && i.uploadedBy !== id)
-                    return <Product item={i} show={true} set={set} />;
+                    return <Product item={i} show={true} set={set} setU={setU}/>;
                 })}
               </div>
             </div>

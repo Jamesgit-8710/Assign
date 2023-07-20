@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/vendor.css";
-import { Button } from "antd";
+import { Button, Empty } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
@@ -34,6 +34,7 @@ const Vendor = () => {
   const [data, setData] = useState([]);
   const [files, setFiles] = useState([]);
   const [val3, setVal3] = useState(0);
+  const [u, setU] = useState("")
 
   const { TextArea } = Input;
 
@@ -68,7 +69,7 @@ const Vendor = () => {
     setOpen(true);
   };
 
-  const handleOk = async () => {
+  const handleOk = async (e) => {
     if (name !== "" && price !== "" && qty !== "" && des !== "" && cat !== "") {
       if (files.length === 4) {
         const res = axios.post("http://localhost:8000/addProduct", {
@@ -88,6 +89,7 @@ const Vendor = () => {
           duration: 2,
         });
         setOpen(false);
+        setU(e)
       } else {
         messageApi.open({
           key,
@@ -112,7 +114,7 @@ const Vendor = () => {
     // }, 2000);
   };
 
-  const handleOk2 = () => {
+  const handleOk2 = (e) => {
     if (name !== "" && price !== "" && qty !== "" && des !== "" && cat !== "") {
       if (files.length === 4) {
         const res = axios.post("http://localhost:8000/addProduct", {
@@ -132,6 +134,7 @@ const Vendor = () => {
           duration: 2,
         });
         setOpen(false);
+        setU(e);
       } else {
         messageApi.open({
           key,
@@ -206,7 +209,9 @@ const Vendor = () => {
     };
 
     getData();
-  }, []);
+  }, [u]);
+
+  const f = data.filter((i) => i.uploadedBy === id && i.status === val2)
 
   return (
     <div className="vendorBackground">
@@ -293,9 +298,10 @@ const Vendor = () => {
                 backgroundColor: "rgb(241, 243, 245)",
               }}
             >
-              {data.map((i, index) => {
+              {f.length===0?<div style={{height: "60vh",width: "90%",backgroundColor: "white",paddingTop: 200,margin: "auto"}}><Empty description='No Added Product!'/></div>:
+              data.map((i, index) => {
                 if (i.uploadedBy === id && i.status === val2)
-                  return <Product item={i} show={false} />;
+                  return <Product item={i} show={false} d={setU}/>;
               })}
             </div>
 

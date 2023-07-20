@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../styles/loginSignup.css'
 import logo from '../assets/shopify.png'
-import shop from '../assets/banner.jpg'
+import shop from '../assets/sale.gif'
 import Login from '../components/Login'
 import close from '../assets/close.png'
 import { Radio } from 'antd';
