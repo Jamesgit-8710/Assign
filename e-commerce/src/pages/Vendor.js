@@ -30,7 +30,7 @@ const Vendor = () => {
   const [price, setPrice] = useState("");
   const [qty, setQty] = useState("");
   const [des, setDes] = useState("");
-  const [cat, setCat] = useState("");
+  const [cat, setCat] = useState(""); 
   const [data, setData] = useState([]);
   const [files, setFiles] = useState([]);
   const [val3, setVal3] = useState(0);
