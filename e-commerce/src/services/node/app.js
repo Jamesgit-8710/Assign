@@ -8,7 +8,7 @@ app.use(express.json());
 
 const main = async () => {
   await mongoose.connect(
-    "mongodb+srv://jeja8710:LYzvNm9aNWpnWnNO@cluster0.1yxyjic.mongodb.net/shopcart"
+    "mongodb://127.0.0.1:27017/shopcart"
   );
 
   console.log("connected!");
