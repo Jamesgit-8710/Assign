@@ -11,7 +11,7 @@ function Home() {
   console.log(state.users.isLoading);
   //   const [name, setName] =
   if (state.users.isLoading) {
-    return <div>Loding...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
