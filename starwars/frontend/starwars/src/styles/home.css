@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.mainBackground{
+    height: 100vh;
+    width: 100vw;
+    background-image: url('https://cdn.registerdisney.go.com/v4/asset/bundler/STARWARS/v4/images/v1/starwars-background-web.webp');
+    background-size: cover;
+}
