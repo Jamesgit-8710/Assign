@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: User Request API
+  description: User Requests API
+  version: 1.0.0
+  contact:
+    name: James
+    email: james.1131@zenmonk.tech
+servers: 
+  - url: "http://localhost:8000"
+paths:
+  /test:
+    post:
+      tags:
+        - Add User
+      summary: Creating a new User Request
+      description: Creating a new User Request in system
+      requestBody:
+        description: Create a new user request in the system
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+        required: true
+      responses:
+        '201':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreationResponseInfo'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  schemas:
+    UserCreationResponseInfo:
+      type: object
+      properties:
+        user:
+          type: string
+        pass:
+          type: string
+    UserRequest:
+      type: object
+      properties:
+        user:
+          type: string
+        pass:
+          type: string
+      required:
+        - userName
+        - password
