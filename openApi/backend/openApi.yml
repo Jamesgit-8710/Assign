@@ -24,7 +24,7 @@ paths:
         required: true
       responses:
         '201':
-          description: Internal server error
+          description: Request created
           content:
             application/json:
               schema:
@@ -64,5 +64,5 @@ components:
         pass:
           type: string
       required:
-        - userName
-        - password
+        - user
+        - pass
