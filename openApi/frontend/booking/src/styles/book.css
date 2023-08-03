@@ -1,0 +1,19 @@
+.book{
+    height: 100vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.innerDiv{
+    height: 380px;
+    width: 400px;
+    background-color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.heading{
+    margin-bottom: 30px;
+}
