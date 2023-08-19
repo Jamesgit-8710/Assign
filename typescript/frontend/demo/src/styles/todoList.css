@@ -1,0 +1,6 @@
+.todoList{
+    height: 87%;
+    width: 99.8%;
+    margin-top: 10px;
+    overflow-y: scroll;
+}

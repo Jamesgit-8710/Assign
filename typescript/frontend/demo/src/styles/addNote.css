@@ -1,0 +1,18 @@
+.addNote{
+    width: 100%;
+    margin: auto;
+}
+
+.addNote input{
+    height: 40px;
+    width: 80%;
+    border: 0px;
+    background-color: aliceblue;
+}
+
+.addNote button{
+    height: 40px;
+    width: 90px;
+    border: 0px;
+    margin-left: 9px;
+}

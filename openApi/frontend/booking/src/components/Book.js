@@ -11,7 +11,7 @@ const Book = () => {
     const [age, setAge] = useState(0);
 
   const book = async() => {
-    await axios.post("http://localhost:8000/book",{from: from, to: to, date: date, name: name, age: age});
+    await axios.post("http://localhost:8000/sendDetails",{message: {from: from, to: to, date: date, name: name, age: age}});
   }
 
   return (

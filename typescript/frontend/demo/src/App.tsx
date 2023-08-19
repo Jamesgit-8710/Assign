@@ -1,10 +1,10 @@
 import React from 'react'
-import Container from './components/Container'
+import Main from './pages/Main'
 
 const App = () => {
   return (
     <div>
-      <Container text="working..."/>
+      <Main/>
     </div>
   )
 }
