@@ -27,11 +27,13 @@ class Producer {
       age: message.age
     }
 
-    await this.channel.publish(
+    const isMessage = await this.channel.publish(
       exchangeName,
       routingKey,
       Buffer.from(JSON.stringify(logDetails))
     )
+
+    console.log(isMessage);
 
     console.log(`key : ${routingKey}, message : ${message}`)
   }
