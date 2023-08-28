@@ -9,6 +9,7 @@ const producer = new Producer();
 
 const RegisterUser = async (req, res) => {
   const session = await startSession();
+  const uuid = uuidv4();
 
   try {
     const UserData = req.body;
@@ -16,13 +17,14 @@ const RegisterUser = async (req, res) => {
 
     session.startTransaction();
 
+    UserData.uuid=uuid;
     const userRequest = new UserModel(UserData);
     // console.log(userRequest,UserData);
 
     const savedUserRequest = userRequest.save();
 
     const rabbitmqInfo = {
-      uuid: uuidv4(),
+      uuid: uuid,
       fired_at: new Date().toISOString(),
       // userRequest: updatedResponse,
       eventType: "user-request-created",
@@ -32,18 +34,17 @@ const RegisterUser = async (req, res) => {
       routing_key,
       rabbitmqInfo
     );
-      
+
     if (isMessagePublished && savedUserRequest) {
       await session.commitTransaction();
       res.status(201).json({
         status: "Created",
       });
-    } else { 
+    } else {
       await session.abortTransaction();
-      updatedResponse && helper.deleteFromDataBase(updatedResponse.uuid);
       res.status(500).json({
         error:
-          "Failed to publish message to RabbitMQ and saving data in database",
+          "ERROR: occured while creating new user request.",
       });
     }
   } catch (err) {
@@ -55,19 +56,44 @@ const RegisterUser = async (req, res) => {
 };
 
 const allUsers = (req, res) => {
-  userModel.find({}).then((result) => {
-    res.status(200).send(result);
-  });
+  try {
+    userModel.find({}).then((result) => {
+      res.status(200).send(result);
+    });
+  } catch (error) {
+    console.log("Error occurred while fetching all users : " + error.message);
+    res.status(500).json({ error: error.message });
+  }
 };
 
 const userById = (req, res) => {
-  const uuid = "req.params.uuid";
-  console.log(uuid)
-//   userModel.findOne({uuid: uuid}).then((result) => {
-//     console.log(result)
-//     res.status(200).send("result");
-//   });
-res.send("fgsfgdfgsdfsfffffffffffffffffffff")
+  const uuid = req.params.uuid;
+
+  try {
+    userModel.findOne({ uuid: uuid }).then((result) => {
+      res.status(200).send(result);
+    });
+  } catch (error) {
+    console.log("Error occurred while fetching user with uuid:", error.message);
+    res.status(500).json({ error: error.message });
+  }
 };
 
-module.exports = { RegisterUser, allUsers, userById };
+const deleteById = (req, res) => {
+  const uuid = req.params.uuid;
+
+  try {
+    userModel.deleteOne({ uuid: uuid }).then((result) => {
+      console.log(result);
+      res.status(200).send("User Deleted");
+    });
+  } catch (error) {
+    console.log(
+      "Error occurred while deleting the user with uuid:",
+      error.message
+    );
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { RegisterUser, allUsers, userById, deleteById };

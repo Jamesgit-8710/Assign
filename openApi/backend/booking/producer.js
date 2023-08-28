@@ -16,7 +16,7 @@ class Producer {
     }
 
     const exchangeName = config.rabbitMQ.exchangeName;
-    await this.channel.assertExchange(exchangeName, 'direct');
+    await this.channel.assertExchange(exchangeName, 'fanout');
 
     const logDetails = {
       logType: routingKey,
