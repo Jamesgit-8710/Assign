@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/todoList.css'
+import '@/styles/todoList.css'
 import Note from './Note'
 
 type props = {

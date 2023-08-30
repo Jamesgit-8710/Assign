@@ -98,4 +98,53 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+docker compose up -d
+docker compose down
+docker ps
+
+{
+  "uuid": "string",
+  "basicsData": {
+    "businessDomain": "Domain1",
+    "name": "string",
+    "lastName": "string",
+    "headquaters": "headquater1",
+    "role": "string",
+    "additionalIndications": "string"
+  },
+  "emailData": [
+    {
+      "accountName": "string",
+      "workspace": "workspace1"
+    }
+  ],
+  "systumData": {
+    "accountName": "string",
+    "systems": [
+      {
+        "system": "system1",
+        "headquarters": "headquater1",
+        "apps": "app1"
+      }
+    ]
+  },
+  "campusData": {
+    "accountName": "string",
+    "campuses": [
+      {
+        "campus": "system1",
+        "area": "headquater1"
+      }
+    ]
+  },
+  "serviceData": {
+    "userName": "string",
+    "contactEmail": "string",
+    "directories": "string",
+    "courses": [
+      "string"
+    ]
+  }
+}
+
 

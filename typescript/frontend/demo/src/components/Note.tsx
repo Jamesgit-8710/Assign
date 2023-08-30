@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/note.css'
+import '@/styles/note.css'
 
 type props = {
     text : String

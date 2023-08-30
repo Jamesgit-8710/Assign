@@ -42,14 +42,14 @@ const RegisterUser = async (req, res) => {
       });
     } else {
       await session.abortTransaction();
-      res.status(500).json({
+      res.status(400).json({
         error:
           "ERROR: occured while creating new user request.",
       });
     }
   } catch (err) {
     console.log("Error while creating user request!", err.message);
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   } finally {
     session.endSession();
   }

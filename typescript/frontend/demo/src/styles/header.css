@@ -1,0 +1,75 @@
+.header{
+    height: 90vh;
+    width: 100vw;
+    background-color: black;
+    display: flex;
+}
+
+.headerLeft{
+    height: 100%;
+    width: 50%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.headerRight{
+    height: 100%;
+    width: 50%;
+    /* background-color: blue; */
+    background-image: url('../assets/woman.jpg');
+    background-size: cover;
+}
+
+.navbar{
+    height: 70px;
+    width: 100%;
+    display: flex;
+    position: absolute;
+}
+
+.navLeft{
+    width: 50%;
+    color: white;
+}
+
+.navRight{
+    width: 50%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    color: white;
+}
+
+.rightSpace{
+    margin-right: 70px;
+}
+
+.mainHeading{
+    font-size: 6rem;
+    color: white;
+    margin-left: 100px;
+    margin-bottom: 0;
+}
+
+.joinBtn{
+    height: 35px;
+    width: 90px;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 3px;
+    color: white;
+}
+
+.designingBtn{
+    height: 45px;
+    width: 300px;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 3px;
+    color: white;
+    margin-left: 100px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}

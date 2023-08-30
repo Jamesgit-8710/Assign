@@ -1,10 +1,11 @@
 import React from 'react'
-import Main from './pages/Main'
+import Photographer from './pages/Photographer'
+import '@/localise/index'
 
 const App = () => {
   return (
     <div>
-      <Main/>
+      <Photographer/>
     </div>
   )
 }

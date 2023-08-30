@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../styles/addNote.css'
+import '@/styles/addNote.css'
 
 type props = {
   function : Function
@@ -16,9 +16,13 @@ const AddNote = (func:props) => {
       alert("field is empty!");
   }
 
+  const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value)
+  }
+  
   return (
     <div className='addNote'>
-        <input type='text' value={input} placeholder='write somthing here...' style={{paddingLeft: 10}} onChange={(e) => {setInput(e.target.value)}}/>
+        <input type='text' value={input} placeholder='write somthing here...' style={{paddingLeft: 10}} onChange={onChange}/>
         <button onClick={add}>ADD</button>
     </div>
   )

@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: './backend'
+      dockerfile: dockerfile
+    ports:
+      - 8000:8000
+    container_name: express-container
+    networks:
+      - user-request
+    command: >
+      /bin/sh -c "
+        echo Waiting for rabbitmq service start... ;
+        while ! nc -z rabbitmq 5672;
+        do
+          sleep 1;
+        done;
+        echo Connected!;
+        npm run dev;
+      "
+    environment:
+      - AMQP_URL=amqp://rabbitmq:5672
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mongodb
+      - rabbitmq
+
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    container_name: mongo-container
+    networks: 
+      - user-request
+    volumes:
+      - mongoData:/data/db
+    env_file:
+      - ./backend/config.env
+  
+  rabbitmq:
+    container_name: rabbitmq-container
+    image: rabbitmq:3.8-management-alpine
+    networks:
+      - user-request
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+networks:
+  user-request:
+
+volumes:
+  mongoData:
