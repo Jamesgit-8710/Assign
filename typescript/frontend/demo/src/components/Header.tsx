@@ -30,7 +30,7 @@ const Header = () => {
           </div>
           <div className="headerLeft">
             <h1 className="mainHeading">{t("Find the Photographer")}</h1>
-            <p style={{ color: "white", marginLeft: "100px" }}>
+            <p style={{ color: "white", marginLeft: "150px" }}>
               Designing, Writing, Animations, Photography, Videos
             </p>
             <button className="designingBtn">Designing</button>
